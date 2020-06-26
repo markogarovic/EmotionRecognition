@@ -1,0 +1,24 @@
+{
+  "name": "emotionrecognition",
+  "version": "1.0.0",
+  "description": "",
+  "main": "face-api.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markogarovic/EmotionRecognition.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markogarovic/EmotionRecognition/issues"
+  },
+  "homepage": "https://github.com/markogarovic/EmotionRecognition#readme",
+  "dependencies": {
+    "@tensorflow/tfjs-node": "^1.7.4",
+    "canvas": "^2.6.1",
+    "face-api.js": "^0.22.2"
+  }
+}
