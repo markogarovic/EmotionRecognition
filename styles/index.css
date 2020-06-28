@@ -6,8 +6,41 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+}
+.main{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 canvas {
   position: absolute;
+}
+.box{
+  width: 400px;
+}
+.controls {
+  padding-left: 80px;
+  width: 400px;
+  flex: 1; 
+}
+.controls button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 5px double #b9171e;
+  box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  background-color: #d4141d;
+  color: white;
+  font-size: 15px;
+  font-family: Roboto;
+  font-weight: bold;
+  margin: 0 20px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); 
+}
+.controls button:focus {
+  outline: none; 
 }
