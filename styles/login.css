@@ -19,3 +19,8 @@
     font-size: 15px;
     font-weight: bold;
 }
+.wrong{
+    color: rgba(255, 111, 111, 0.823);
+    padding: 3px 0 0 0;
+ }
+ 
