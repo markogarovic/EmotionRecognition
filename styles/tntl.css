@@ -1,12 +1,16 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 .container{
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row;
     justify-content: center;
     width: 100%;
     height: auto;
     justify-content: start;
     margin-left: 10px;
-    margin-right: 10px;
+    padding-top: 10px;
 }
 .left{
     padding: 0px 10px;
@@ -38,4 +42,7 @@
 }
 video {
     background-color: black;
+}
+#yt{
+    width: 1000px;
 }

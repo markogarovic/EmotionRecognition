@@ -9,11 +9,15 @@ function app(){
   document.querySelector(".start").addEventListener("click", startVideo);
   document.querySelector(".stop").addEventListener("click", stopVideo);
 }
+var timer;
 function stopVideo(){
     localStream.getVideoTracks()[0].stop();
     isWebcamOn = 0;
     document.querySelector("#yt").load();
     document.querySelector("#yt").pause();
+    clearInterval(timer);
+    document.querySelector("#score").innerHTML = '0';
+
 }
 async function startVideo() {  
     return new Promise((resolve, reject) => {
@@ -24,6 +28,11 @@ async function startVideo() {
         navigatorAny.mozGetUserMedia ||
         navigatorAny.msGetUserMedia;
       if (navigator.getUserMedia) {
+        var score = 0;
+        timer = setInterval(function(){
+          score += Math.floor(Math.random() * 10);
+          document.querySelector("#score").innerHTML = score.toString();
+        },100);
         document.querySelector("#yt").play();
         navigator.getUserMedia(
           { video: true },
@@ -55,7 +64,18 @@ video.addEventListener('play', ()=>{
             document.querySelector("#yt").load();
             document.querySelector("#yt").pause();
             clearInterval(game);
-            console.log("You lose!");
+            clearInterval(timer);
+            document.querySelector(".modalScore").innerHTML = "Your score is " + document.querySelector("#score").innerHTML;
+            $('#myModal').modal('show');
+            var tryAgain = setInterval(async ()=> {
+              const detections1 = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
+              if(detections1[0].expressions['angry'] > 0.7){
+                $('#myModal').modal('hide');
+                clearInterval(tryAgain);
+                clearInterval(timer);
+                startVideo();
+              }
+            }, 100 );
         }
     }, 100)
 })
