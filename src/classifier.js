@@ -136,7 +136,7 @@ function captureSample(obj, label) {
 	}
 }
 function preprocessImage(img) {
-	const tensor        = tf.browser.fromPixels(img).resizeNearestNeighbor([224, 224]);
+	const tensor        = tf.browser.fromPixels(img).resizeNearestNeighbor([448, 448]);
 	const croppedTensor = cropImage(tensor);
 	const batchedTensor = croppedTensor.expandDims(0);
 	

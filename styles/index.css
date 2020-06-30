@@ -44,3 +44,6 @@ canvas {
 .controls button:focus {
   outline: none; 
 }
+video {
+  background-color: black;
+}

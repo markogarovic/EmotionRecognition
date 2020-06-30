@@ -37,8 +37,9 @@ img {
     height: 55%;
 }
 .live-cam video{
-    width: 224px;
-    height: 224px;
+    width: 448px;
+    height: 448px;
+    background-color: black;
 }
 .KNN-container{
     width: 45%;
