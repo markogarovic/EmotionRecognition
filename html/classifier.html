@@ -21,13 +21,13 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand" href="#">Emotion Recognizer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav" id="navBar">
+              <div class="navbar-nav ml-auto" id="navBar">
                 <a class="nav-item nav-link" href="../html/homepage.html">Home</a>
                 <a class="nav-item nav-link active" href="#">ER</a>
                 <a class="nav-item nav-link" href="../html/tntl.html">Game</a>
@@ -39,8 +39,9 @@
 
     <div class="classifier-select">
         <div class="radio">
-            <label><input type="radio" name="classifier-radio" value="0" checked>KNN-classifier</label>
-        </div>
+            <label><input type="radio" name="classifier-radio" value="0" checked>KNN-classifier </label>
+        </div> 
+
         <div class="radio">
             <label><input type="radio" name="classifier-radio" value="1">Custom classifier</label>
         </div>
@@ -61,11 +62,8 @@
                     <img id="emoticon-wow" src="../Images/wow.gif">
                 </div>
             </div>
-            <div id="console">
-                <!--Samo za test div!-->
-            </div>
             <div class="live-cam">
-                <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+                <video autoplay playsinline muted id="webcam" width="448" height="448"></video>
             </div>
         </div>
         
