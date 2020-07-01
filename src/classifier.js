@@ -287,7 +287,7 @@ var isPredictingKNN = false;
 async function Predict () {
   isPredictingKNN = true;
   while(isPredictingKNN){
-    console.log(isPredictingKNN);
+    
     if (classifierKNN.getNumClasses() > 0) {
         // Get the activation from mobilenet from the webcam.
         const activation = net.infer(webcamElement, "conv_preds");
@@ -296,33 +296,10 @@ async function Predict () {
 
         const classes = ["happy", "sad", "suprised", "angry"];
         highlightTile(result.classIndex);
-        document.getElementById("console").innerText = `
-            prediction: ${classes[result.classIndex]}\n
-            probability: ${result.confidences[result.classIndex]}
-        `;
         tf.nextFrame();
       }
   }
   unhighlightTiles();
-  /*
-  Visak poslije izbrisat!
-  setInterval(async () => {
-      if (classifierKNN.getNumClasses() > 0) {
-      // Get the activation from mobilenet from the webcam.
-      const activation = net.infer(webcamElement, "conv_preds");
-      // Get the most likely class and confidences from the classifier module.
-      const result = await classifierKNN.predictClass(activation);
-
-      const classes = ["happy", "sad", "suprised", "angry"];
-      highlightTile(result.classIndex);
-      document.getElementById("console").innerText = `
-          prediction: ${classes[result.classIndex]}\n
-          probability: ${result.confidences[result.classIndex]}
-      `;
-      }
-
-      tf.nextFrame();
-  }, 1000);*/
 }
 function addExampleK(obj,classId){
   if (isWebcamOn == 1) {
