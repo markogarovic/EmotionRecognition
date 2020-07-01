@@ -3,12 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotion Recognizer</title>
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../styles/index.css">
+    <script type="module" src="../app.js" defer></script>
+	<script src="../face-api.min.js" defer></script>
+    <script src="../src/index.js" defer></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../styles/homepage.css">
+
+    <style>
+        header{
+            position: absolute;
+            top:0;
+            right: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,50 +28,29 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-              <div class="navbar-nav ml-auto">
-                <a class="nav-item nav-link" href="login.html">Log In</a>
+              <div class="navbar-nav ml-auto" id="navBar">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="../html/classifier.html">ER</a>
+                <a class="nav-item nav-link" href="../html/tntl.html">Game</a>
+                <a class="nav-item nav-link" href="../html/login.html" id="logout">Logout</a>
               </div>
             </div>
           </nav>
     </header>
-    <div class="title-container">
-        <div class="title">
-            <h1>
-                Emotion Recognizer
-            </h1>
-            <p>
-                The best online app for emotion recognition
-            </p>
-            <button class="btn btn-primary" onclick="window.location.href='register.html'">
-                Register Now
-            </button>
-        </div>
+    <div class="box">
     </div>
-    <div class="desc">
-        <div class="desc-outer">
-            <div class="desc-inner">
-                <img src="../Images/private.png">
-            </div>
-            <h4>Private</h4>
-            <p>Only you can access your learning data and videos. Nothing is stored.</p>
-        </div>
-        <div class="desc-outer">
-            <div class="desc-inner">
-                <img src="../Images/check.png">
-            </div>
-            <h4>No setup required</h4>
-            <p>Emotion Recognizer is an online app and everything works in the cloud. All you need to do is upload images.</p>
-        </div>
-        <div class="desc-outer">
-            <div class="desc-inner">
-                <img src="../Images/live.png">
-            </div>
-            <h4>Live detection</h4>
-            <p>Emotion Recognizer detects emotions in realtime</p>
-        </div>
+    <div class="main">
+        <video id="video" width="720" height="560" autoplay muted></video>
+    </div>
+    <div class="controls">
+      <button class="start">Start</button>
+      <button class="stop">Stop</button>
     </div>
     <footer>
-
+        
     </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

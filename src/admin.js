@@ -9,7 +9,7 @@ logoutBtn.addEventListener("click",(e)=>{
   }
 })
 
-const url = "http://localhost:5000/api/user/all";
+const url = "https://face-expression-app.herokuapp.com/api/user/all";
 var usersIds = []
 fetch(url)
 .then(res=>res.json())
@@ -41,7 +41,7 @@ fetch(url)
 
         delBtn.addEventListener("click",(e)=>{
             
-            fetch(`http://localhost:5000/api/user/${usersIds[i]}`,{
+            fetch(`https://face-expression-app.herokuapp.com/api/user/${usersIds[i]}`,{
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -59,7 +59,7 @@ fetch(url)
         adminBtn.addEventListener("click",(e)=>{
     
             if(adminBtn.checked){
-                fetch(`http://localhost:5000/api/user/admin/${usersIds[i]}`,{
+                fetch(`https://face-expression-app.herokuapp.com/api/user/admin/${usersIds[i]}`,{
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ fetch(url)
                     console.error('Error:', error);
                 });
             }else{
-                fetch(`http://localhost:5000/api/user/adminremove/${usersIds[i]}`,{
+                fetch(`https://face-expression-app.herokuapp.com/api/user/adminremove/${usersIds[i]}`,{
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json'

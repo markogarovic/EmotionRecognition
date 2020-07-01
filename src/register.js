@@ -26,7 +26,7 @@ registerBtn.addEventListener("click", (e)=>{
         password2,
         email
     }
-    url = "http://localhost:5000/register";
+    url = "https://face-expression-app.herokuapp.com/register";
     console.log(data);
     console.log(JSON.stringify(data))
     fetch(url, {

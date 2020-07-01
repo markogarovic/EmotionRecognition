@@ -5,9 +5,6 @@ if(localStorage.getItem("admin")){
   const navbar = document.getElementById("navBar");
   navbar.innerHTML+='<a class="nav-item nav-link" href="./admin.html">Admin panel</a>  '
 }
-if(!localStorage.getItem("admin")){
-  window.location.replace("http://127.0.0.1:5500/index.html");
-}
 const logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click",(e)=>{
   localStorage.removeItem("auth-token")
