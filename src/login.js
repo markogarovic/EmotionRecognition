@@ -11,7 +11,7 @@ loginBtn.addEventListener("click", (e)=>{
         username,
         password
     }
-    url = "http://localhost:5000/login";
+    const url = "http://localhost:5000/login";
     console.log(data)
     fetch(url, {
         method: 'POST', 
@@ -34,6 +34,9 @@ loginBtn.addEventListener("click", (e)=>{
             console.log('Success:', data.data);
         }
         localStorage.setItem("auth-token",data.accessToken)
+        if(data.data.admin === true){
+            localStorage.setItem("admin",true)
+        }
         return
     })
     .then(()=>{

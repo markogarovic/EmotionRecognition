@@ -1,3 +1,18 @@
+if(!localStorage.getItem("auth-token")){
+  window.location.replace("http://127.0.0.1:5500/html/login.html");
+}
+if(localStorage.getItem("admin")){
+  const navbar = document.getElementById("navBar");
+  navbar.innerHTML+='<a class="nav-item nav-link" href="./html/admin.html">Admin panel</a>  '
+}
+const logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener("click",(e)=>{
+  localStorage.removeItem("auth-token")
+  if(localStorage.getItem("admin")){
+    localStorage.removeItem("admin")
+  }
+})
+
 const video = document.getElementById('video')
 let localStream;
 var isWebcamOn = 0;
@@ -58,11 +73,4 @@ video.addEventListener('play', () => {
 })
 
 
-const logoutBtn = document.getElementById("logout");
-logoutBtn.addEventListener("click",(e)=>{
-  localStorage.removeItem("auth-token")
-})
 
-if(!localStorage.getItem("auth-token")){
-  window.location.replace("http://127.0.0.1:5500/html/login.html");
-}

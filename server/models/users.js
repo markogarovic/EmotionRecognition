@@ -19,7 +19,7 @@ const user = new mongoose.Schema({
     unique: true,
     required: true,
   },
-  role: {
+  admin: {
     type: Boolean,
     default: false
   },

@@ -1,0 +1,48 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    justify-content: start;
+    margin-left: 10px;
+    padding-top: 10px;
+}
+.left{
+    padding: 0px 10px;
+    display: flex;
+    flex-flow: column wrap;
+}
+.controls {
+    padding: 10px 0;
+    display: flex;
+}
+.controls button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 5px double #b9171e;
+    box-shadow: 4px 6px 6px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    background-color: #d4141d;
+    color: white;
+    font-size: 15px;
+    font-family: Roboto;
+    font-weight: bold;
+    margin: 0 20px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1); 
+}
+.controls button:focus {
+    outline: none; 
+}
+video {
+    background-color: black;
+}
+#yt{
+    width: 1000px;
+}

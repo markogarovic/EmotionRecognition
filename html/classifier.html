@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+    <link rel="stylesheet" href="../styles/classifier.css">
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script> 
+    <!-- Load MobileNet -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet"></script> 
+    <!-- Load KNN Classifier -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/knn-classifier"></script>
+    <script defer src="../src/classifier.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script defer src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Emotion Recognizer</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+              <div class="navbar-nav" id="navBar">
+                <a class="nav-item nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link active" href="#">ER</a>
+                <a class="nav-item nav-link" href="../html/tntl.html">Game</a>
+                <a class="nav-item nav-link" href="../html/login.html" id="logout">Logout</a>
+              </div>
+            </div>
+          </nav>
+    </header>
+
+    <div class="classifier-select">
+        <div class="radio">
+            <label><input type="radio" name="classifier-radio" value="0" checked>KNN-classifier</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="classifier-radio" value="1">Custom classifier</label>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="video-emotion-container">
+            <div class="emotions-container">
+                <div class="emotion-box" id="emotion-laugh">
+                    <img id="emoticon-laugh" src="../Images/laugh.gif">
+                </div>
+                <div class="emotion-box" id="emotion-sad">
+                    <img id="emoticon-sad" src="../Images/sad.gif">
+                </div>
+                <div class="emotion-box" id="emotion-angry">
+                    <img id="emoticon-angry" src="../Images/angry.gif">
+                </div>
+                <div class="emotion-box" id="emotion-wow">
+                    <img id="emoticon-wow" src="../Images/wow.gif">
+                </div>
+            </div>
+            <div id="console">
+                <!--Samo za test div!-->
+            </div>
+            <div class="live-cam">
+                <video autoplay playsinline muted id="webcam" width="224" height="224"></video>
+            </div>
+        </div>
+        
+        <div class="KNN-container">
+            <div class="emotion-buttons">
+                <button class="start">Start</button>
+                <button class="stop">Stop</button>
+                <button id="predict">Predict</button>
+               
+            </div>
+            <div class="emotion-input">
+                <!--Promijeni imena klasa!!!-->
+                <div class="emotion-input-outer">
+                    <div class="emotion-input-inner" id="sample-laugh">
+                        <img id="happy-class">
+                    </div>  
+                    <button id="class-laugh">Add 🤣</button>
+                    <div id="count-laugh">0 samples</div>
+                </div>
+                <div class="emotion-input-outer" id="sample-sad">
+                    <div class="emotion-input-inner">
+                        <img id="sad-class">
+                    </div>
+                    <button id="class-sad">Add 😰</button>
+                    <div id="count-sad">0 samples</div>
+                </div>
+                <div class="emotion-input-outer" id="sample-wow">
+                    <div class="emotion-input-inner">
+                        <img id="wow-class">
+                    </div>
+                    <button id="class-wow">Add 😲</button>
+                    <div id="count-wow">0 samples</div>
+                </div>
+                <div class="emotion-input-outer" id="sample-angry">
+                    <div class="emotion-input-inner">
+                        <img id="angry-class">
+                        
+                    </div>
+                    <button id="class-angry">Add 😡</button>
+                    <div id="count-angry">0 samples</div>
+                </div>
+            </div>
+        </div>       
+        <div class="custom-classifier-container hidden" id="ccc">
+            <!--Promijeni imena klasa!!!-->
+            <div class="emotion-tuner">
+                <!--Promijeni imena klasa!!!-->
+                <div class="emotion-dropdown">
+                    <label>Learning Rate</label>
+                    <select id="emotion-learning-rate">
+                        <option>0.00001</option>
+                        <option selected>0.0001</option>
+                        <option>0.001</option>
+                        <option>0.003</option>
+                    </select>
+                </div>
+                <div class="emotion-dropdown">
+                    <label>Batch Size</label>
+                    <select id="emotion-batch-size">
+                        <option>0.05</option>
+                        <option selected>0.4</option>
+                        <option>0.1</option>
+                        <option>1</option>
+                    </select>
+                </div>
+                <div class="emotion-dropdown">
+                    <label>Epochs</label>
+                    <select id="emotion-epochs">
+                        <option>10</option>
+                        <option selected>20</option>
+                        <option>40</option>
+                    </select>
+                </div>
+                <div class="emotion-dropdown">
+                    <label>Hidden Units</label>
+                    <select id="emotion-hidden-units">
+                        <option>10</option>
+                        <option selected>100</option>
+                        <option>200</option>
+                    </select>
+                </div>
+            </div>
+            <div class="emotion-buttons">
+                <button class="start">Start</button>
+                <button class="stop">Stop</button>
+                <button id="predict2">Predict</button>
+                <button id="train2">Train</button>
+            </div>
+            <div class="emotion-input">
+                <!--Promijeni imena klasa!!!-->
+                <div class="emotion-input-outer">
+                    <div class="emotion-input-inner">
+                        <img id="happy-class2">
+                    </div>  
+                    <button class="class-a">Add 🤣</button>
+                    <div id="count-laugh2">0 samples</div>
+                </div>
+                <div class="emotion-input-outer">
+                    <div class="emotion-input-inner">
+                        <img id="sad-class">
+                        
+                    </div>
+                    <button class="class-b">Add 😰</button>
+                    <div id="count-sad2">0 samples</div>
+                </div>
+                <div class="emotion-input-outer">
+                    <div class="emotion-input-inner">
+                        <img id="wow-class2">
+                    </div>
+                    <button class="class-c">Add 😲</button>
+                    <div id="count-wow2">0 samples</div>
+                </div>
+                <div class="emotion-input-outer">
+                    <div class="emotion-input-inner">
+                        <img id="angry-class2">
+                        
+                    </div>
+                    <button class="class-d">Add 😡</button>
+                    <div id="count-angry2">0 samples</div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

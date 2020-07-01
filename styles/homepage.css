@@ -1,0 +1,50 @@
+body{
+    background-color: #FAFAFA;
+}
+.title-container{
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)) , url(../Images/ai-digital.jpg) center center;
+  background-size: cover;
+}
+.title{
+    color: blanchedalmond;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    align-items: center;
+    font-size: 32px;
+}
+.desc{
+    display: flex;
+    flex: 1;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+}
+.desc-outer{
+    padding: 10px 0px;
+    box-shadow: 5px 5px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    margin: 20px 50px;
+    flex-flow: column wrap;
+    display: flex;
+    width: 250px;
+    height: 300px; 
+}
+.desc-inner{
+    width: 100%;
+    height: 100px;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+}
+.desc-inner img{
+    border: 0px;
+    height: 90%;
+}

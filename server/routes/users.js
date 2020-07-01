@@ -4,9 +4,9 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const User = require('../controllers/users');
-const { authenticate } = require("../config/verifyToken");
+// const { authenticate } = require("../config/verifyToken");
 
-router.put("/:username", authenticate, (req, res) => {
+router.put("/:username", (req, res) => {
     const userName = req.params.username;
     if (req.body.password !== undefined) {
       throw "Invalid Password";
@@ -48,35 +48,63 @@ router.put("/:username", authenticate, (req, res) => {
     }
 });
   
-router.delete("/:username", async (req, res) => {
-    const userName = req.params.username;
-    try {
-        const user = await User.delete(userName);
-        res.status(204).json(user);
-    } catch (error) {
-        res.json(error);
-    }
-});
+// router.delete("/:username", async (req, res) => {
+//     const userName = req.params.username;
+//     try {
+//         const user = await User.delete(userName);
+//         res.status(204).json(user);
+//     } catch (error) {
+//         res.json(error);
+//     }
+// });
   
-router.get("/:username", authenticate, async (req, res) => {
-    const userName = req.params.username;
-    try {
-        const user = await User.findByUsername(userName);
-        res.status(200).json({ user: user });
-    } catch (error) {
-        res.json(error);
-    }
-});
+// router.get("/:username", async (req, res) => {
+//     const userName = req.params.username;
+//     try {
+//         const user = await User.findByUsername(userName);
+//         res.status(200).json({ user: user });
+//     } catch (error) {
+//         res.json(error);
+//     }
+// });
   
 router.get("/all", async (req, res) => {
-    try {
-        const users = await User.findAll();
-        res.status(200).json(users);
-    } catch (error) {
-        res.json(error);
-    }
+  try {
+      const users = await User.findAll();
+      res.status(200).json(users);
+  } catch (error) {  
+
+    res.json(error);
+  }
 });
 
+router.put("/admin/:id", async (req, res) => {
+  try {
+      const user = await User.makeAdmin(req.params.id);
+      res.status(202).json(user);
+  } catch (error) {  
+
+    res.json(error);
+  }
+});
+router.put("/adminremove/:id", async (req, res) => {
+  try {
+      const user = await User.removeAdmin(req.params.id);
+      res.status(202).json(user);
+  } catch (error) {  
+
+    res.json(error);
+  }
+});
  
+router.delete("/:id", async (req, res) => {
+  try {
+      const user = await User.deleteById(req.params.id);
+      res.status(202).json(user);
+  } catch (error) {  
+ 
+    res.json(error);
+  }
+});
 
 module.exports = router;

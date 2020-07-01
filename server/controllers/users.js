@@ -53,11 +53,53 @@ function deleteUser(UserToDelete) {
     }
   });
 }
+function deleteById(UserToDelete) {
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(User.findOneAndRemove({ _id: UserToDelete }));
+    } catch (e) {
+      console.log(e);
+      reject(false);
+    }
+  });
+}
 
 function updateByUsername(UserToUpdate, query) {
   return new Promise((resolve, reject) => {
     try {
       resolve(User.findOneAndUpdate({ username: UserToUpdate }, query));
+    } catch (e) {
+      console.log(e);
+      reject(false);
+    }
+  });
+}
+
+function updateById(UserToUpdate, query) {
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(User.findOneAndUpdate({ _id: UserToUpdate }, query));
+    } catch (e) {
+      console.log(e);
+      reject(false);
+    }
+  });
+}
+
+function makeAdmin(UserToUpdate) {
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(User.findOneAndUpdate({ _id: UserToUpdate }, {admin:true}));
+    } catch (e) {
+      console.log(e);
+      reject(false);
+    }
+  });
+}
+function removeAdmin(UserToUpdate) {
+  return new Promise((resolve, reject) => {
+    try {
+      resolve(User.findOneAndUpdate({ _id: UserToUpdate }, {admin:false}));
     } catch (e) {
       console.log(e);
       reject(false);
@@ -71,5 +113,9 @@ module.exports = {
   findAll,
   create,
   deleteByUsername: deleteUser,
+  deleteById,
   updateByUsername,
+  updateById,
+  makeAdmin,
+  removeAdmin
 };
