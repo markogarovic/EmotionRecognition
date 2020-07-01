@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const expressValidator = require("express-validator");
 const flash = require("connect-flash");
 const session = require("express-session");
+const cors = require('cors')
 
 require("dotenv").config();
 const { DB_URL } = require("./config/database");
@@ -40,6 +41,8 @@ app.use(function (req, res, next) {
   res.locals.messages = require("express-messages")(req, res);
   next();
 });
+
+app.use(cors({credentials: true, origin: true}))
 
 app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
