@@ -49,7 +49,7 @@ registerBtn.addEventListener("click", (e)=>{
         }
     })
     .then(()=>{
-        window.location.replace("http://127.0.0.1:5500/html/login.html");
+        window.location.replace("login.html");
     })
     .catch((error) => {
         // alert(error)
