@@ -5,9 +5,6 @@ if(localStorage.getItem("admin")){
   const navbar = document.getElementById("navBar");
   navbar.innerHTML+='<a class="nav-item nav-link" href="./admin.html">Admin panel</a>  '
 }
-if(!localStorage.getItem("admin")){
-  window.location.replace("http://127.0.0.1:5500/index.html");
-}
 const logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click",(e)=>{
   localStorage.removeItem("auth-token")
@@ -15,7 +12,7 @@ logoutBtn.addEventListener("click",(e)=>{
     localStorage.removeItem("admin")
   }
 })
-var isStart = false;
+
 const video = document.getElementById('video');
 Promise.all([
     faceapi.nets.tinyFaceDetector.loadFromUri('../models'),
@@ -28,26 +25,16 @@ function app(){
   document.querySelector(".stop").addEventListener("click", stopVideo);
 }
 var timer;
-function stopVideo(isStop = false){
-    if(isStop){
-      document.querySelector(".modalScore").innerHTML = "Your score is " + document.querySelector("#score").innerHTML;
-      document.querySelector("#tryAgain").innerHTML = "";
-      $('#myModal').modal('show');
-    }
-    
+function stopVideo(){
     localStream.getVideoTracks()[0].stop();
     isWebcamOn = 0;
     document.querySelector("#yt").load();
     document.querySelector("#yt").pause();
     clearInterval(timer);
     document.querySelector("#score").innerHTML = '0';
-    isStart = false;
 
 }
-async function startVideo() {
-  if(!isStart){
-    isStart = true;
-    document.querySelector("#tryAgain").innerHTML = "Make angry face to try again!";
+async function startVideo() {  
     return new Promise((resolve, reject) => {
       const navigatorAny = navigator;
       navigator.getUserMedia =
@@ -78,7 +65,6 @@ async function startVideo() {
         reject();
       }
     });
-  }
 }
 
 video.addEventListener('play', ()=>{
@@ -95,11 +81,6 @@ video.addEventListener('play', ()=>{
             clearInterval(game);
             clearInterval(timer);
             document.querySelector(".modalScore").innerHTML = "Your score is " + document.querySelector("#score").innerHTML;
-            document.querySelector("#close").addEventListener("click",function () {
-              stopVideo(true);
-              isStart = false;
-              clearInterval(game);
-            })
             $('#myModal').modal('show');
             var tryAgain = setInterval(async ()=> {
               const detections1 = await faceapi.detectAllFaces(video, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
@@ -107,8 +88,6 @@ video.addEventListener('play', ()=>{
                 $('#myModal').modal('hide');
                 clearInterval(tryAgain);
                 clearInterval(timer);
-                isStart = false;
-                clearInterval(game);
                 startVideo();
               }
             }, 100 );

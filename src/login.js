@@ -11,7 +11,7 @@ loginBtn.addEventListener("click", (e)=>{
         username,
         password
     }
-    const url = "http://localhost:5000/login";
+    const url = "https://face-expression-app.herokuapp.com/login";
     console.log(data)
     fetch(url, {
         method: 'POST', 
@@ -40,7 +40,7 @@ loginBtn.addEventListener("click", (e)=>{
         return
     })
     .then(()=>{
-        window.location.replace("http://127.0.0.1:5500/index.html");
+        window.location.replace("http://127.0.0.1:5500/html/homepage.html");
     })
 
     .catch((error) => {

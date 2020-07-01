@@ -5,9 +5,6 @@ if(localStorage.getItem("admin")){
   const navbar = document.getElementById("navBar");
   navbar.innerHTML+='<a class="nav-item nav-link" href="./admin.html">Admin panel</a>  '
 }
-if(!localStorage.getItem("admin")){
-  window.location.replace("http://127.0.0.1:5500/index.html");
-}
 const logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click",(e)=>{
   localStorage.removeItem("auth-token")
@@ -287,7 +284,7 @@ var isPredictingKNN = false;
 async function Predict () {
   isPredictingKNN = true;
   while(isPredictingKNN){
-    
+    console.log(isPredictingKNN);
     if (classifierKNN.getNumClasses() > 0) {
         // Get the activation from mobilenet from the webcam.
         const activation = net.infer(webcamElement, "conv_preds");
@@ -296,10 +293,33 @@ async function Predict () {
 
         const classes = ["happy", "sad", "suprised", "angry"];
         highlightTile(result.classIndex);
+        document.getElementById("console").innerText = `
+            prediction: ${classes[result.classIndex]}\n
+            probability: ${result.confidences[result.classIndex]}
+        `;
         tf.nextFrame();
       }
   }
   unhighlightTiles();
+  /*
+  Visak poslije izbrisat!
+  setInterval(async () => {
+      if (classifierKNN.getNumClasses() > 0) {
+      // Get the activation from mobilenet from the webcam.
+      const activation = net.infer(webcamElement, "conv_preds");
+      // Get the most likely class and confidences from the classifier module.
+      const result = await classifierKNN.predictClass(activation);
+
+      const classes = ["happy", "sad", "suprised", "angry"];
+      highlightTile(result.classIndex);
+      document.getElementById("console").innerText = `
+          prediction: ${classes[result.classIndex]}\n
+          probability: ${result.confidences[result.classIndex]}
+      `;
+      }
+
+      tf.nextFrame();
+  }, 1000);*/
 }
 function addExampleK(obj,classId){
   if (isWebcamOn == 1) {

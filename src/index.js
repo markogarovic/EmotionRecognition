@@ -3,10 +3,7 @@ if(!localStorage.getItem("auth-token")){
 }
 if(localStorage.getItem("admin")){
   const navbar = document.getElementById("navBar");
-  navbar.innerHTML+='<a class="nav-item nav-link" href="./html/admin.html">Admin panel</a>  '
-}
-if(!localStorage.getItem("admin")){
-  window.location.replace("http://127.0.0.1:5500/index.html");
+  navbar.innerHTML+='<a class="nav-item nav-link" href="./admin.html">Admin panel</a>  '
 }
 const logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click",(e)=>{
@@ -70,6 +67,7 @@ video.addEventListener('play', () => {
     const resizedDetections = faceapi.resizeResults(detections, displaySize)
     canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
     faceapi.draw.drawDetections(canvas, resizedDetections)
+    //faceapi.draw.drawFaceLandmarks(canvas, resizedDetections)
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
   }, 100)
 })
