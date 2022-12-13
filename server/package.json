@@ -21,6 +21,6 @@
     "express-validator": "^3.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^4.10.2",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^3.0.1"
   }
 }
